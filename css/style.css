@@ -358,25 +358,64 @@ section {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 120px 0 var(--spacing-4xl);
-    background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-beige) 100%);
+    padding: 100px 0 0 0;
+    background-color: var(--color-cream);
     overflow: hidden;
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    background: url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200') center/cover;
-    opacity: 0.3;
+.hero .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: var(--spacing-3xl);
+    max-width: 1400px;
+    width: 100%;
 }
 
 .hero-content {
     position: relative;
-    max-width: 650px;
+    z-index: 2;
+    padding: var(--spacing-3xl) 0;
+}
+
+.hero-image {
+    position: relative;
+    height: 85vh;
+    max-height: 650px;
+    min-height: 500px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+}
+
+.hero-image::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100px;
+    height: 100px;
+    border: 3px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    z-index: -1;
+}
+
+.hero-image::after {
+    content: '';
+    position: absolute;
+    bottom: 40px;
+    left: -40px;
+    width: 80px;
+    height: 80px;
+    background-color: var(--color-primary);
+    border-radius: var(--radius-md);
+    opacity: 0.2;
+    z-index: -1;
 }
 
 .hero-subtitle {
@@ -387,14 +426,27 @@ section {
     letter-spacing: 3px;
     color: var(--color-primary);
     margin-bottom: var(--spacing-md);
+    position: relative;
+    padding-left: 50px;
+}
+
+.hero-subtitle::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 2px;
+    background-color: var(--color-primary);
 }
 
 .hero-title {
-    font-size: var(--fs-5xl);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
     color: var(--color-charcoal);
     margin-bottom: var(--spacing-lg);
-    line-height: 1.2;
+    line-height: 1.15;
 }
 
 .hero-text {
@@ -402,12 +454,40 @@ section {
     color: var(--color-gray);
     margin-bottom: var(--spacing-2xl);
     line-height: 1.8;
+    max-width: 500px;
 }
 
 .hero-buttons {
     display: flex;
     gap: var(--spacing-md);
     flex-wrap: wrap;
+}
+
+.hero-stats {
+    display: flex;
+    gap: var(--spacing-2xl);
+    margin-top: var(--spacing-3xl);
+    padding-top: var(--spacing-2xl);
+    border-top: 1px solid var(--color-beige);
+}
+
+.hero-stat {
+    text-align: left;
+}
+
+.hero-stat-number {
+    font-family: var(--font-heading);
+    font-size: var(--fs-3xl);
+    font-weight: 700;
+    color: var(--color-primary);
+    display: block;
+}
+
+.hero-stat-label {
+    font-size: var(--fs-sm);
+    color: var(--color-gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* ===================================
@@ -2207,6 +2287,53 @@ section {
         --fs-3xl: 1.5rem;
     }
     
+    .hero .container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-2xl);
+    }
+    
+    .hero-content {
+        text-align: center;
+        padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+    
+    .hero-subtitle {
+        padding-left: 0;
+    }
+    
+    .hero-subtitle::before {
+        display: none;
+    }
+    
+    .hero-text {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .hero-stats {
+        justify-content: center;
+    }
+    
+    .hero-image {
+        height: 400px;
+        min-height: auto;
+        order: -1;
+    }
+    
+    .hero-image img {
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
+    
+    .hero-image::before,
+    .hero-image::after {
+        display: none;
+    }
+    
     .nav-menu {
         position: fixed;
         top: 80px;
@@ -2313,12 +2440,21 @@ section {
     
     .hero {
         min-height: auto;
-        padding: 120px 0 60px;
+        padding: 80px 0 0;
     }
     
-    .hero::before {
-        width: 100%;
-        opacity: 0.2;
+    .hero-image {
+        height: 300px;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        align-items: center;
+    }
+    
+    .hero-stat {
+        text-align: center;
     }
     
     .hero-buttons {
